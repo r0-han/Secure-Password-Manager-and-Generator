@@ -3,7 +3,7 @@
 #include<math.h>
 #include<string.h>
 #include<ctype.h>
-#include <unistd.h>
+#include<unistd.h>
 #define ROT_MIN '!'
 #define ROT_MAX '~'
 #define ROT_SIZE (ROT_MAX - ROT_MIN + 1)
@@ -115,7 +115,7 @@ void passvault(){
 			u = "\nUsername : ";                    //UserName
 			printf("\n Enter Username : ");
 			EnterUserId=getpass("");
-			EnterUserId=rotate_encrypt(NULL,EnterUserId);
+			EnterUserId=rotate_encrypt(NULL,EnterUserId);//implemented encryption
 			fputs(EnterUserId,fp);
 			p=rotate_encrypt(NULL,p);
 			fputs(p,fp);                    //Password
