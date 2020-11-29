@@ -33,7 +33,7 @@ void randomPasswordGenerator(void)
 		randomPasswordGenerator();
 	}
 	if (n>=10 && n<=25){
-	printf("\n\nHere is a random password of %d characters for you: ",n );  
+	printf("\n\nHere is a random password of %d characters for you: ",n );
 	char pass[n];
 	srand((unsigned int) time(0) + getpid());
 	for(int i = 0; i < n; i++)
@@ -74,7 +74,7 @@ static char *rotate_encrypt(const char *key, const char *value)
 		ch = rv[i] + ROT_HALF;
 		if (ch > ROT_MAX) {
 			rv[i] = ch - ROT_SIZE;
-		} 
+		}
 		else {
 			rv[i] = ch;
 		}
@@ -87,17 +87,17 @@ void passvault(){
   	FILE *fp;
   	FILE *pFile;
   	char* p = " Password : ";
-  	char* u = "\nUsername : ";
+  	char* u = "\n Username : ";
   	char dummy[] = " ";
-  	char select; 
-  	char ch; 
+  	char select;
+  	char ch;
   	char* EnterPass;
   	char* EnterUserId;
   	char* Decrypted;
   	char* passkey; //Rssy@491
   	char key[] = "Rssy@491";
   	char* str;
-	
+
 	start:   // User Decision input
 	printf("\n\n Please Select from below options : ");
 	printf("\n To Store passwords press w : ");
@@ -112,10 +112,11 @@ void passvault(){
 			fgets(dummy, 50, stdin);
 			u=rotate_encrypt(NULL,u);
 			fputs(u,fp);
-			u = "\nUsername : ";                    //UserName
+			u = "\n\n Username : ";                    //UserName
 			printf("\n Enter Username : ");
-			EnterUserId=getpass("");
-			EnterUserId=rotate_encrypt(NULL,EnterUserId);//implemented encryption
+			//EnterUserId=getpass("");
+      fgets(EnterUserId,50,stdin);
+      EnterUserId=rotate_encrypt(NULL,EnterUserId);//implemented encryption
 			fputs(EnterUserId,fp);
 			p=rotate_encrypt(NULL,p);
 			fputs(p,fp);                    //Password
@@ -123,7 +124,7 @@ void passvault(){
   			EnterPass=rotate_encrypt(NULL,EnterPass);
 			fputs(EnterPass,fp);
 		  	p = " Password : ";
-		  	fflush(fp);
+		  	//fflush(fp);
 		  	fclose(fp);
 	  		printf("\n\t PASSWORD STORED SUCCESSFULLY!! ");
 
@@ -135,7 +136,7 @@ void passvault(){
 		  	fflush(stdin);
 		  	passkey = getpass("");
   		  	if(strncmp(passkey, "Rssy@491",8) == 0){                 // READING THE FILE
-		
+
 		    	fp = fopen ("myfile.txt","r+");
 		        char line[1024];
 		        while (fgets(line, sizeof(line), fp) != NULL) {
@@ -146,7 +147,7 @@ void passvault(){
 		      	fclose(fp);
 		      	goto start;
 		  	}    // If password Entered Correct
-		
+
 		  	else{
 		    	printf("\n\n\t Incorrect Password!! \n");
 		      	exit(0);
@@ -191,7 +192,7 @@ void quitOrContinue(void){
 
 
 void menu(void){
-	
+
 	char select='0';
 	Begin:
 	printf("\n\n===============================================");			//Interface
@@ -202,23 +203,23 @@ void menu(void){
 	printf("\n \033[0;32m 3. Strong random Password Generator\x1b[0m");
 	printf("\n \033[1;33m 4. Exit\x1b[0m");
 	printf("\n\n===============================================");
-	
+
 	printf("\n\n Please select from above options : \n\n");
 	scanf("%s",&select);
 	switch(select){
 		case '1':
 		    passvault();
 	    goto Begin;
-	
+
 		case '2':
 		    header();
 	    	check();
 		goto Begin;
-	
+
 		case '3':
 			randomPasswordGenerator();
 	    	quitOrContinue();
-    	goto Begin;	
+    	goto Begin;
 
 		case '4':
     		footer();
@@ -304,7 +305,7 @@ void check(){
                 printf("\nYour password can be cracked under few months.");
             }
             else if(time_to_break_pass > 0.00f && counter < 1){
-                printf("\nTime to bruteforce a password : %0.2f years", time_to_break_pass);
+                printf("\nYour password can be cracked under %0.2f year(s)", time_to_break_pass);
             }
             //checking if password is only alphanumeric, only digits or only alphabets.
             int flag_for_alpha = 1;
@@ -332,16 +333,16 @@ void check(){
                 if (flag_for_alnum)
                     printf("\n\x1b[31m[+] WARNING!\x1b[0m Your password only contains alphabets and numbers. Make sure to include special characters to increase password strength.");
             }
-            if (pass_complexity <= 50){
+            if (pass_complexity <= 65){
                 printf("\nPassword Strength : \x1b[31mWeak\x1b[0m");
             }
-            else if (pass_complexity > 50 && pass_complexity <= 90){
+            else if (pass_complexity > 65 && pass_complexity <= 85){
                 printf("\nPassword Strength : \x1b[36mAverage password\x1b[0m");
             }
-            else if (pass_complexity > 90 && pass_complexity <= 120){
+            else if (pass_complexity > 85 && pass_complexity <= 140){
                 printf("\nPassword Strength : \x1b[34mGood Password\x1b[0m");
             }
-            else if (pass_complexity > 120){
+            else if (pass_complexity > 140){
                 printf("\nPassword Strength : \x1b[32mBest Password\x1b[0m");
             }
             printf("\n\n\n==========================================================================================");
@@ -375,7 +376,7 @@ void check(){
 }
 
 int main(){
-	
+
 	menu();
 	return 0;
 }
