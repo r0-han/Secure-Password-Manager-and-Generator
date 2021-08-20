@@ -2,4 +2,4 @@
 
 * Minor1 Project made in C (works on Linux OS)
 
-* ![nothing](./SPMG.png "Home Interface")
+![nothing](./SPMG.png "Home Interface")
